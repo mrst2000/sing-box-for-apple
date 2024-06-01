@@ -12,13 +12,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    # Update to use the maintained ruby/setup-ruby
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '2.7'
+        ruby-version: '3.0' # or the latest version supported
+
     - name: Install CocoaPods
-      run: sudo gem install cocoapods
+      run: gem install cocoapods
+
     - name: Install dependencies
       run: pod install
+
     - name: Build
-      run: xcodebuild -workspace YourProjectName.xcworkspace -scheme YourSchemeName -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.4' build
+      run: xcodebuild -workspace MrLinux.xcworkspace -scheme YourSchemeName -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12,OS=latest' build
